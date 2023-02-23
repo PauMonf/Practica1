@@ -2,7 +2,7 @@ package es.uji.al415716;
 
 import java.util.List;
 
-public class RowWithLabel extends Row{
+public class RowWithLabel extends Row {
     private int numberClass;
 
     private RowWithLabel(){

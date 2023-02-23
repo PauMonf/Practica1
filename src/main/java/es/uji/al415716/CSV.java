@@ -31,8 +31,8 @@ public class CSV {
         while (scanner.hasNextLine()) {
             String read = scanner.nextLine();
             int lastComa = read.lastIndexOf(',');
-            stringClass = read.substring(lastComa);
-            List<String> list = List.of(read.substring(0,lastComa-1).split(","));
+            stringClass = read.substring(lastComa+1);
+            List<String> list = List.of(read.substring(0,lastComa).split(","));
 
             if (tableWithLabels.labelsToIndex.containsKey(stringClass))
                 numberClass = tableWithLabels.labelsToIndex.get(stringClass);

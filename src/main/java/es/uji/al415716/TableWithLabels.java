@@ -10,8 +10,8 @@ public class TableWithLabels extends Table{
     public Map<String,Integer> labelsToIndex;
 
     public TableWithLabels(){
-        this.setHeaders(new ArrayList<>());
-        this.setRows(new ArrayList<>());
+        super();
+        List<RowWithLabel> rowWithLabelList=new ArrayList<>();
         labelsToIndex=new HashMap<>();
     }
 
