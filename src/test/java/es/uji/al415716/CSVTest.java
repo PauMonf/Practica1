@@ -17,7 +17,7 @@ class CSVTest {
         //Comrueba el número de ejemplares leído
         assertEquals(150,tableWithLabels.getRows().size());
 
-        //Comprueba el número de columnas tres veces
+        //Comprueba el número de columnas
         assertEquals(4,tableWithLabels.getRowAt(0).getData().size());
         assertEquals(4,tableWithLabels.getRowAt(70).getData().size());
         assertEquals(4,tableWithLabels.getRowAt(149).getData().size());
