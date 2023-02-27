@@ -27,12 +27,9 @@ class CSVTest {
         assertEquals(stringsEsperados,tableWithLabels.getHeaders());
 
         //Comprueba el número asignado a cada fila
-        RowWithLabel algo= (RowWithLabel) tableWithLabels.getRowAt(0);
-        assertEquals(tableWithLabels.labelsToIndex.get("Iris-setosa"),algo.getNumberClass());
-        algo= (RowWithLabel) tableWithLabels.getRowAt(70);
-        assertEquals(tableWithLabels.labelsToIndex.get("Iris-versicolor"),algo.getNumberClass());
-        algo= (RowWithLabel) tableWithLabels.getRowAt(149);
-        assertEquals(tableWithLabels.labelsToIndex.get("Iris-virginica"),algo.getNumberClass());
+        assertEquals(tableWithLabels.labelsToIndex.get("Iris-setosa"),tableWithLabels.getRowAt(0).getNumberClass());
+        assertEquals(tableWithLabels.labelsToIndex.get("Iris-versicolor"),tableWithLabels.getRowAt(70).getNumberClass());
+        assertEquals(tableWithLabels.labelsToIndex.get("Iris-virginica"),tableWithLabels.getRowAt(149).getNumberClass());
 
         //Comprueba si la información guardada se corresponde con la del archivo
         List<Double> doublesEsperados=List.of(5.1,3.5,1.4,0.2);

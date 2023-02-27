@@ -5,14 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TableWithLabels extends Table{
+public class TableWithLabels extends Table {
 
-    public Map<String,Integer> labelsToIndex;
+    public Map<String, Integer> labelsToIndex;
 
-    public TableWithLabels(){
+    public TableWithLabels() {
         super();
-        List<RowWithLabel> rowWithLabelList=new ArrayList<>();
-        labelsToIndex=new HashMap<>();
+        labelsToIndex = new HashMap<>();
     }
-//:D
+
+    public RowWithLabel getRowAt(int rowNummber) {
+        return (RowWithLabel) super.getRowAt(rowNummber);
+    }
 }
