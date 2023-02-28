@@ -3,18 +3,13 @@ package es.uji.al415716;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Table {
+public class Table <T extends Row>{
     private List<String> headers;
-    private List<Row> rows;
+    private List<T> rows;
 
     public Table() {
         headers = new ArrayList<>();
         rows = new ArrayList<>();
-    }
-
-    public Table(int headersCapacity, int rowsCapacity) {
-        headers = new ArrayList<>(headersCapacity);
-        rows = new ArrayList<>(rowsCapacity);
     }
 
     public List<String> getHeaders() {
@@ -25,11 +20,11 @@ public class Table {
         this.headers = headers;
     }
 
-    public List<Row> getRows() {
+    public List<T> getRows() {
         return rows;
     }
 
-    public void setRows(List<Row> rows) {
+    public void setRows(List<T> rows) {
         this.rows = rows;
     }
 
@@ -37,7 +32,7 @@ public class Table {
         return rows.get(rowNummber);
     }
 
-    public boolean addRow(Row row){
+    public boolean addRow(T row){
         return rows.add(row);
     }
 
