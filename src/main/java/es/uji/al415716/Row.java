@@ -22,6 +22,7 @@ public class Row {
         this.data = data;
     }
 
+    //Le pasas una lista de Strings y los transforma en Doubles
     public List<Double> stringListToDouble(List<String> data) {
         List<Double> doubleList = new ArrayList<>(data.size());
         for (String string : data) {
