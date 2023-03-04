@@ -18,7 +18,4 @@ public class RowWithLabel extends Row {
         return numberClass;
     }
 
-    public void setNumberClass(int numberClass) {
-        this.numberClass = numberClass;
-    }
 }

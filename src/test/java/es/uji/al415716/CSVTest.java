@@ -8,6 +8,31 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CSVTest {
+    @Test
+    void readTable() throws FileNotFoundException {
+        CSV csv = new CSV();
+        Table table = csv.readTable("src/files/miles_dollars.csv");
+
+        //Comrueba el número de ejemplares leído
+        assertEquals(25, table.getRows().size());
+
+        //Comprueba el número de columnas
+        assertEquals(2, table.getRowAt(0).getData().size());
+        assertEquals(2, table.getRowAt(12).getData().size());
+        assertEquals(2, table.getRowAt(24).getData().size());
+
+        //Comprueba si los nombres de las cabeceras son correctos
+        List<String> stringsEsperados = List.of("Miles","Dollars");
+        assertEquals(stringsEsperados, table.getHeaders());
+
+        //Comprueba si la información guardada se corresponde con la del archivo
+        List<Double> doublesEsperados = List.of(1211.0, 1802.0);
+        assertEquals(doublesEsperados, table.getRowAt(0).getData());
+        doublesEsperados = List.of(3082.0,3555.0);
+        assertEquals(doublesEsperados, table.getRowAt(12).getData());
+        doublesEsperados = List.of(5439.0,6964.0);
+        assertEquals(doublesEsperados, table.getRowAt(24).getData());
+    }
 
     @Test
     void readTableWithLabels() throws FileNotFoundException {
@@ -39,4 +64,5 @@ class CSVTest {
         doublesEsperados = List.of(5.9, 3.0, 5.1, 1.8);
         assertEquals(doublesEsperados, tableWithLabels.getRowAt(149).getData());
     }
+
 }

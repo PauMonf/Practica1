@@ -20,12 +20,17 @@ public class KNN {
                 estimation = row.getNumberClass();
             }
 
-            //Esto lo he puesto solo para optimizar, es prescindible
+            //Esto lo he puesto solo para optimizar pero es prescindible
+            /*      Si la distancia es cero querrá decir que los datos estudiados coinciden con los de una fila
+                de la tabla y que estos muy probablemente sean de la misma clase. Además de que hace el codigo
+                ligeramente mas optimo al no consultar siempre todas las filas de la tabla.
+            */
             if (minDistance == 0) break;
         }
         return estimation;
     }
 
+    //Calcula la distancia entre dos puntos, si las dos listas no miden lo mismo lanzará un error.
     public double euclideanMetric(List<Double> z, List<Double> x) throws Exception {
         if (z.size() != x.size()) throw new Exception();
         double distance = 0;
