@@ -3,9 +3,9 @@ package es.uji.al415716;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Table <T extends Row>{
+public class Table {
     private List<String> headers;
-    private List<T> rows;
+    private List<Row> rows;
 
     public Table() {
         headers = new ArrayList<>();
@@ -20,11 +20,11 @@ public class Table <T extends Row>{
         this.headers = headers;
     }
 
-    public List<T> getRows() {
+    public List<Row> getRows() {
         return rows;
     }
 
-    public void setRows(List<T> rows) {
+    public void setRows(List<Row> rows) {
         this.rows = rows;
     }
 
@@ -32,8 +32,8 @@ public class Table <T extends Row>{
         return rows.get(rowNummber);
     }
 
-    public boolean addRow(T row){
-        return rows.add(row);
+    public void addRow(List<String> data) {
+        rows.add(new Row(data));
     }
 
 }

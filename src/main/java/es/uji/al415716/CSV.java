@@ -8,12 +8,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CSV {
+    private String SPLITTER=",";
+
     public Table readTable(String filePath) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File(filePath));
         Table table = new Table();
-        table.setHeaders(List.of(scanner.nextLine().split(",")));
+        table.setHeaders(List.of(scanner.nextLine().split(SPLITTER)));
         while (scanner.hasNextLine()) {
-            table.addRow(new Row(List.of(scanner.nextLine().split(","))));
+            table.addRow(List.of(scanner.nextLine().split(SPLITTER)));
         }
 
         return table;
@@ -22,28 +24,17 @@ public class CSV {
     public TableWithLabels readTableWithLabels(String filePath) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File(filePath));
         TableWithLabels tableWithLabels = new TableWithLabels();
-        tableWithLabels.setHeaders(List.of(scanner.nextLine().split(",")));
+        tableWithLabels.setHeaders(List.of(scanner.nextLine().split(SPLITTER)));
 
-        int numberOfClasses = 0;
-        int numberClass;
         String stringClass;
 
         while (scanner.hasNextLine()) {
             String read = scanner.nextLine();
-            int lastComa = read.lastIndexOf(',');
-            stringClass = read.substring(lastComa+1);
-            List<String> list = List.of(read.substring(0,lastComa).split(","));
+            int lastComa = read.lastIndexOf(SPLITTER);
+            stringClass = read.substring(lastComa + 1);
+            List<String> list = List.of(read.substring(0, lastComa).split(SPLITTER));
 
-            if (tableWithLabels.labelsToIndex.containsKey(stringClass))
-                numberClass = tableWithLabels.labelsToIndex.get(stringClass);
-            else {
-                tableWithLabels.labelsToIndex.put(stringClass, numberOfClasses);
-                numberClass = numberOfClasses;
-                numberOfClasses++;
-            }
-
-            RowWithLabel rowWithLabel=new RowWithLabel(list,numberClass);
-            tableWithLabels.addRow(rowWithLabel);
+            tableWithLabels.addRowWithLabel(list, stringClass);
         }
 
         return tableWithLabels;
