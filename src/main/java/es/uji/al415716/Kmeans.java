@@ -53,8 +53,8 @@ public class Kmeans {
 
     private int closestCluster(List<Double> dato){
         int n=0;
-        double x;
-        double min=euclideanMetric(dato,clusters.get(0).getCentroide());
+        double x=euclideanMetric(dato,clusters.get(0).getCentroide());
+        double min=x;
         for(int j=1;j<clusters.size();j++){
             x=euclideanMetric(dato,clusters.get(j).getCentroide());
             if(x<min){

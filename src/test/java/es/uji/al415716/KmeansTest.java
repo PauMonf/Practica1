@@ -15,11 +15,22 @@ class KmeansTest {
 
     @Test
     void estimate() throws FileNotFoundException {
-        Kmeans kmeans=new Kmeans(3,2,1);
         CSV csv=new CSV();
         TableWithLabels table=csv.readTableWithLabels("src/files/basic1.csv");
+        Kmeans kmeans=new Kmeans(4,5,1);
         kmeans.train(table);
-        int x= kmeans.estimate(List.of(245.55799410834155,134.50199833817595));
-        System.out.println(x);
+        int x= kmeans.estimate(List.of(79.40828883263248,152.8344238267352));
+        System.out.println("Resultado: "+x+" Esperado: 0");
+        x= kmeans.estimate(List.of(262.35201641365506,64.57463208572932));
+        System.out.println("Resultado: "+x+" Esperado: 1");
+
+        int y;
+        RowWithLabel rowWithLabel;
+        for(Row row:table.getRows()){
+            x=kmeans.estimate(row.getData());
+            rowWithLabel=(RowWithLabel) row;
+            y=rowWithLabel.getNumberClass();
+            System.out.println("Resultado: "+x+" Esperado: "+y);
+        }
     }
 }

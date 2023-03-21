@@ -40,12 +40,14 @@ public class Cluster {
 
     public void centroide() {
         List<Double> calculo = new ArrayList<>(centroide.size());
+        for(int i=0;i<centroide.size();i++)
+            calculo.add(0.0);
         for (Row row : rows) {
             for (int i = 0; i < row.getData().size(); i++)
                 calculo.set(i, calculo.get(i) + row.getData().get(i));
         }
         for (int i = 0; i < calculo.size(); i++){
-            calculo.set(i,calculo.get(i)/ calculo.size());
+            calculo.set(i,calculo.get(i)/ rows.size());
         }
         centroide=calculo;
     }
