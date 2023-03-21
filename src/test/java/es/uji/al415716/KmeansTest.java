@@ -14,7 +14,7 @@ class KmeansTest {
     }
 
     @Test
-    void estimate() throws FileNotFoundException {
+    void estimate() throws FileNotFoundException, ExceptionKmeans {
         CSV csv=new CSV();
         TableWithLabels table=csv.readTableWithLabels("src/files/basic1.csv");
         Kmeans kmeans=new Kmeans(4,5,1);

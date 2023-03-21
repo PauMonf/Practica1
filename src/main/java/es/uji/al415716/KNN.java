@@ -2,7 +2,7 @@ package es.uji.al415716;
 
 import java.util.List;
 
-public class KNN {
+public class KNN implements Algorithm<TableWithLabels,List<Double>,Integer>{
     private TableWithLabels table;
 
     public void train(TableWithLabels data) {

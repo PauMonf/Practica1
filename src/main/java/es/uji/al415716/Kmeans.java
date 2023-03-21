@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class Kmeans {
+public class Kmeans implements Algorithm<Table,List<Double>,Integer>{
     private int numClusters;
     private int numIterations;
     private long seed;
@@ -18,7 +18,9 @@ public class Kmeans {
         clusters=new ArrayList<>(numClusters);
     }
 
-    public void train(Table datos) {
+    public void train(Table datos) throws ExceptionKmeans {
+        if(datos.getRows().size()<numClusters) throw new ExceptionKmeans();
+
         Random random = new Random(seed);
 
         //Guardo en clusters K puntos aleatorios de la tabla
