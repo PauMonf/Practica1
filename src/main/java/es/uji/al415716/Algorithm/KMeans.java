@@ -1,17 +1,19 @@
-package es.uji.al415716;
+package es.uji.al415716.Algorithm;
+
+import es.uji.al415716.Row.Row;
+import es.uji.al415716.Table.Table;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
-public class Kmeans implements Algorithm<Table,List<Double>,Integer>{
+public class KMeans implements Algorithm<Table,List<Double>,Integer>{
     private int numClusters;
     private int numIterations;
     private long seed;
     private List<Cluster> clusters;
 
-    public Kmeans(int numClusters, int numIterations, long seed) {
+    public KMeans(int numClusters, int numIterations, long seed) {
         this.numClusters = numClusters;
         this.numIterations = numIterations;
         this.seed = seed;

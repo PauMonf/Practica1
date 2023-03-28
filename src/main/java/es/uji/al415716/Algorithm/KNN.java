@@ -1,4 +1,7 @@
-package es.uji.al415716;
+package es.uji.al415716.Algorithm;
+
+import es.uji.al415716.Row.RowWithLabel;
+import es.uji.al415716.Table.TableWithLabels;
 
 import java.util.List;
 

@@ -1,4 +1,6 @@
-package es.uji.al415716;
+package es.uji.al415716.Table;
+
+import es.uji.al415716.Row.Row;
 
 import java.util.ArrayList;
 import java.util.List;

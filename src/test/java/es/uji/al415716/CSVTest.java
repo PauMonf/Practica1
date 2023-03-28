@@ -1,5 +1,8 @@
 package es.uji.al415716;
 
+import es.uji.al415716.Algorithm.CSV;
+import es.uji.al415716.Table.Table;
+import es.uji.al415716.Table.TableWithLabels;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -11,7 +14,7 @@ class CSVTest {
     @Test
     void readTable() throws FileNotFoundException {
         CSV csv = new CSV();
-        Table table = csv.readTable("src/files/miles_dollars.csv");
+        Table table = csv.readTable("data/miles_dollars.csv");
 
         //Comrueba el número de ejemplares leído
         assertEquals(25, table.getRows().size());
@@ -37,7 +40,7 @@ class CSVTest {
     @Test
     void readTableWithLabels() throws FileNotFoundException {
         CSV csv = new CSV();
-        TableWithLabels tableWithLabels = csv.readTableWithLabels("src/files/iris.csv");
+        TableWithLabels tableWithLabels = csv.readTableWithLabel("data/iris.csv");
 
         //Comrueba el número de ejemplares leído
         assertEquals(150, tableWithLabels.getRows().size());

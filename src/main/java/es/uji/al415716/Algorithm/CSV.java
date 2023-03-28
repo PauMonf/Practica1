@@ -1,9 +1,10 @@
-package es.uji.al415716;
+package es.uji.al415716.Algorithm;
+
+import es.uji.al415716.Table.Table;
+import es.uji.al415716.Table.TableWithLabels;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,7 +22,7 @@ public class CSV {
         return table;
     }
 
-    public TableWithLabels readTableWithLabels(String filePath) throws FileNotFoundException {
+    public TableWithLabels readTableWithLabel(String filePath) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File(filePath));
         TableWithLabels tableWithLabels = new TableWithLabels();
         tableWithLabels.setHeaders(List.of(scanner.nextLine().split(SPLITTER)));

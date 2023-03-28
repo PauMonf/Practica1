@@ -1,8 +1,10 @@
 package es.uji.al415716;
 
+import es.uji.al415716.Algorithm.CSV;
+import es.uji.al415716.Algorithm.KNN;
+import es.uji.al415716.Table.TableWithLabels;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +15,7 @@ class KNNTest {
     void estimate() throws Exception {
         KNN knn = new KNN();
         CSV csv = new CSV();
-        TableWithLabels tableWithLabels = csv.readTableWithLabels("src/files/iris.csv");
+        TableWithLabels tableWithLabels = csv.readTableWithLabel("data/iris.csv");
         knn.train(tableWithLabels);
         List<Double> data;
 
