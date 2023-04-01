@@ -20,7 +20,8 @@ class KMeansTest {
     @Test
     void estimate() throws Exception {
         CSV csv=new CSV();
-        TableWithLabels table=csv.readTableWithLabel("data/basic1.csv");
+        String sep = System.getProperty("file.separator");
+        TableWithLabels table=csv.readTableWithLabel("data"+sep+"basic1.csv");
         KMeans kmeans=new KMeans(4,5,1);
         kmeans.train(table);
         int x= kmeans.estimate(List.of(79.40828883263248,152.8344238267352));
