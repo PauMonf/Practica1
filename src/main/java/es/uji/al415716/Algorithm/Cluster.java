@@ -40,7 +40,7 @@ public class Cluster {
         rows.add(row);
     }
 
-    public void centroide() {
+    public void calculaCentroide() {
         List<Double> calculo = new ArrayList<>(centroide.size());
         for(int i=0;i<centroide.size();i++)
             calculo.add(0.0);

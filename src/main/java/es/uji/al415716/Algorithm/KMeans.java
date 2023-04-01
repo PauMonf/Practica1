@@ -42,13 +42,14 @@ public class KMeans implements Algorithm<Table,List<Double>,Integer>{
             actualizaCentroides();
             borraPuntos();
         }
-
     }
+
     private void actualizaCentroides(){
         for(Cluster cluster:clusters){
-            cluster.centroide();
+            cluster.calculaCentroide();
         }
     }
+
     private void borraPuntos(){
         for(Cluster cluster:clusters){
             cluster.borraRows();
