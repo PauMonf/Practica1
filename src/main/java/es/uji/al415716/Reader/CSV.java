@@ -1,4 +1,4 @@
-package es.uji.al415716.Algorithm;
+package es.uji.al415716.Reader;
 
 import es.uji.al415716.Table.Table;
 import es.uji.al415716.Table.TableWithLabels;
@@ -40,4 +40,5 @@ public class CSV {
 
         return tableWithLabels;
     }
+
 }

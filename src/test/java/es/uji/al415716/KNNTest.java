@@ -1,6 +1,6 @@
 package es.uji.al415716;
 
-import es.uji.al415716.Algorithm.CSV;
+import es.uji.al415716.Reader.CSV;
 import es.uji.al415716.Algorithm.KNN;
 import es.uji.al415716.Table.TableWithLabels;
 import org.junit.jupiter.api.Test;
@@ -44,21 +44,21 @@ class KNNTest {
 
         a=List.of(0.0);
         b=List.of(1.0);
-        assertEquals(1.0,knn.euclideanMetric(a,b));
+        assertEquals(1.0,knn.distance(a,b));
         a=List.of(0.0);
         b=List.of(-1.0);
-        assertEquals(1.0,knn.euclideanMetric(a,b));
+        assertEquals(1.0,knn.distance(a,b));
         a=List.of(0.0,1.0);
         b=List.of(1.0,0.0);
-        assertEquals(Math.sqrt(2),knn.euclideanMetric(a,b));
-        assertEquals(Math.sqrt(2),knn.euclideanMetric(b,a));
+        assertEquals(Math.sqrt(2),knn.distance(a,b));
+        assertEquals(Math.sqrt(2),knn.distance(b,a));
         a=List.of(0.0,0.0,0.0);
         b=List.of(1.0,1.0,1.0);
-        assertEquals(Math.sqrt(3),knn.euclideanMetric(a,b));
-        assertEquals(Math.sqrt(3),knn.euclideanMetric(b,a));
+        assertEquals(Math.sqrt(3),knn.distance(a,b));
+        assertEquals(Math.sqrt(3),knn.distance(b,a));
         a=List.of(1.0,1.0,1.0,1.0);
         b=List.of(5.0,5.0,5.0,5.0);
-        assertEquals(8.0,knn.euclideanMetric(a,b));
-        assertEquals(8.0,knn.euclideanMetric(b,a));
+        assertEquals(8.0,knn.distance(a,b));
+        assertEquals(8.0,knn.distance(b,a));
     }
 }

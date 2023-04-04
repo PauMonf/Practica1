@@ -1,5 +1,6 @@
 package es.uji.al415716.Algorithm;
 
+import es.uji.al415716.Reader.CSV;
 import es.uji.al415716.Table.Table;
 
 import java.io.BufferedReader;

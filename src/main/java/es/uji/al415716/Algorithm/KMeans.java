@@ -1,5 +1,7 @@
 package es.uji.al415716.Algorithm;
 
+import es.uji.al415716.Distance.Distance;
+import es.uji.al415716.Distance.EuclideanDistance;
 import es.uji.al415716.Row.Row;
 import es.uji.al415716.Table.Table;
 
@@ -7,17 +9,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class KMeans implements Algorithm<Table,List<Double>,Integer>{
+public class KMeans implements Algorithm<Table,List<Double>,Integer>, DistanceClient{
     private int numClusters;
     private int numIterations;
     private long seed;
     private List<Cluster> clusters;
+    private Distance distance;
 
+    //He dejado el constructor original, en este el algoritmo de distancia predeterminado es EuclideanDistance
     public KMeans(int numClusters, int numIterations, long seed) {
         this.numClusters = numClusters;
         this.numIterations = numIterations;
         this.seed = seed;
         clusters=new ArrayList<>(numClusters);
+        this.distance=new EuclideanDistance();
+    }
+    public KMeans(int numClusters, int numIterations, long seed, Distance distance) {
+        this.numClusters = numClusters;
+        this.numIterations = numIterations;
+        this.seed = seed;
+        clusters=new ArrayList<>(numClusters);
+        this.distance=distance;
     }
 
     public void train(Table datos) throws ExceptionKmeans {
@@ -58,10 +70,10 @@ public class KMeans implements Algorithm<Table,List<Double>,Integer>{
 
     private int closestCluster(List<Double> dato){
         int n=0;
-        double x=euclideanMetric(dato,clusters.get(0).getCentroide());
+        double x= distance(dato,clusters.get(0).getCentroide());
         double min=x;
         for(int j=1;j<clusters.size();j++){
-            x=euclideanMetric(dato,clusters.get(j).getCentroide());
+            x= distance(dato,clusters.get(j).getCentroide());
             if(x<min){
                 min=x;
                 n=j;
@@ -79,13 +91,8 @@ public class KMeans implements Algorithm<Table,List<Double>,Integer>{
         return false;
     }
 
-    public double euclideanMetric(List<Double> z, List<Double> x) {
-        //if (z.size() != x.size()) throw new Exception();
-        double distance = 0;
-        for (int i = 0; i < z.size(); i++) {
-            distance += Math.pow(z.get(i) - x.get(i), 2);
-        }
-        return Math.sqrt(distance);
+    public double distance(List<Double> z, List<Double> x) {
+        return distance.calculateDistance(z,x);
     }
 
     public List<Double> centroide(List<Row> puntos) {
@@ -105,4 +112,8 @@ public class KMeans implements Algorithm<Table,List<Double>,Integer>{
     }
 
 
+    @Override
+    public void setDistance(Distance distance) {
+        this.distance=distance;
+    }
 }
