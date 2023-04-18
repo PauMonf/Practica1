@@ -18,6 +18,7 @@ public class CSV {
         while (scanner.hasNextLine()) {
             table.addRow(List.of(scanner.nextLine().split(SPLITTER)));
         }
+        scanner.close();
 
         return table;
     }
@@ -37,6 +38,7 @@ public class CSV {
 
             tableWithLabels.addRowWithLabel(list, stringClass);
         }
+        scanner.close();
 
         return tableWithLabels;
     }
