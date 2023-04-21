@@ -1,9 +1,9 @@
-package es.uji.al415716.Algorithm;
+package es.uji.al415716.algorithm;
 
-import es.uji.al415716.Distance.Distance;
-import es.uji.al415716.Distance.EuclideanDistance;
-import es.uji.al415716.Row.RowWithLabel;
-import es.uji.al415716.Table.TableWithLabels;
+import es.uji.al415716.distance.Distance;
+import es.uji.al415716.distance.EuclideanDistance;
+import es.uji.al415716.row.RowWithLabel;
+import es.uji.al415716.table.TableWithLabels;
 
 import java.util.List;
 
@@ -42,7 +42,6 @@ public class KNN implements Algorithm<TableWithLabels,List<Double>,Integer>, Dis
         return estimation;
     }
 
-    //Calcula la distancia entre dos puntos, si las dos listas no miden lo mismo lanzará un error.
     public double distance(List<Double> z, List<Double> x){
         return distance.calculateDistance(z,x);
     }

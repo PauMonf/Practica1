@@ -1,7 +1,7 @@
-package es.uji.al415716.Reader;
+package es.uji.al415716.reader;
 
-import es.uji.al415716.Table.Table;
-import es.uji.al415716.Table.TableWithLabels;
+import es.uji.al415716.table.Table;
+import es.uji.al415716.table.TableWithLabels;
 
 import java.io.File;
 import java.io.FileNotFoundException;

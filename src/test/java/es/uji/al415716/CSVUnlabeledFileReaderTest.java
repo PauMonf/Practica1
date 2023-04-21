@@ -1,8 +1,7 @@
 package es.uji.al415716;
 
-import es.uji.al415716.Reader.CSV;
-import es.uji.al415716.Reader.CSVUnlabeledFileReader;
-import es.uji.al415716.Table.Table;
+import es.uji.al415716.reader.CSVUnlabeledFileReader;
+import es.uji.al415716.table.Table;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -14,7 +13,8 @@ class CSVUnlabeledFileReaderTest {
 
     @Test
     void readTableFromSource() throws FileNotFoundException {
-        CSVUnlabeledFileReader csv = new CSVUnlabeledFileReader("data/miles_dollars.csv");
+        String sep = System.getProperty("file.separator");
+        CSVUnlabeledFileReader csv = new CSVUnlabeledFileReader("data"+sep+"miles_dollars.csv");
         Table table = csv.readTableFromSource();
 
         //Comrueba el número de ejemplares leído

@@ -1,6 +1,6 @@
-package es.uji.al415716.Algorithm;
+package es.uji.al415716.algorithm;
 
-import es.uji.al415716.Table.Table;
+import es.uji.al415716.table.Table;
 
 import java.util.*;
 import java.util.List;

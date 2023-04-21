@@ -1,20 +1,26 @@
-package es.uji.al415716.Reader;
+package es.uji.al415716.reader;
 
-import es.uji.al415716.Table.Table;
+import es.uji.al415716.table.Table;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 
-public class CSVUnlabeledFileReader extends ReaderTemplate{
-    Scanner scanner;
+/*
+* He creado este código porque estaba teniendo problemas con las diferencias entre Table y TableWithLabels (no acepataba
+* el método addRowWithLabel, en el test no podia almacenar el resultado readTableFromSource en un TableWithLabels, ...).
+* Así que he hecho una implementación de ReaderTemplate (esto) a la cual extienden tanto UnlabeledFileReader como LabeledFileReader.
+* Además he cambiado la variable Table en ReaderTemplate por un genérico que extiende a Table.
+* */
 
+public class CSVFileReader<T extends Table> extends ReaderTemplate<T> {
+
+    Scanner scanner;
     protected String SPLITTER=",";
 
-    public CSVUnlabeledFileReader(String source) {
+    public CSVFileReader(String source) {
         super(source);
-        table=new Table();
     }
 
     @Override
@@ -28,9 +34,7 @@ public class CSVUnlabeledFileReader extends ReaderTemplate{
     }
 
     @Override
-    void processData(String data) {
-        table.addRow(lineToList(data));
-    }
+    void processData(String data) {    }
 
     @Override
     void closeSource() {

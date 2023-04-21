@@ -1,6 +1,6 @@
-package es.uji.al415716.Table;
+package es.uji.al415716.table;
 
-import es.uji.al415716.Row.RowWithLabel;
+import es.uji.al415716.row.RowWithLabel;
 
 import java.util.HashMap;
 import java.util.List;

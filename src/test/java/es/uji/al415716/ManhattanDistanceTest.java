@@ -1,7 +1,6 @@
 package es.uji.al415716;
 
-import es.uji.al415716.Distance.EuclideanDistance;
-import es.uji.al415716.Distance.ManhattanDistance;
+import es.uji.al415716.distance.ManhattanDistance;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

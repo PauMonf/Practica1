@@ -1,13 +1,13 @@
-package es.uji.al415716.Reader;
+package es.uji.al415716.reader;
 
-import es.uji.al415716.Table.Table;
+import es.uji.al415716.table.Table;
 
 import java.io.FileNotFoundException;
 
-public abstract class ReaderTemplate{
+public abstract class ReaderTemplate <T extends Table>{
 
     private String source;
-    protected Table table;
+    protected T table;
 
     public ReaderTemplate(String source) {
         this.source = source;
@@ -18,8 +18,8 @@ public abstract class ReaderTemplate{
     abstract void processData(String data);
     abstract void closeSource();
     abstract boolean hasMoreData(); // comprueba si hay más datos; en nuestro caso, si hay mas línea(s) en el fichero CSV
-    abstract String getNextData(); // obtener el siguiente dato; una línea del fichero CSV en nuestro caso
-    public final Table readTableFromSource() throws FileNotFoundException {
+    abstract String getNextData(); // obtener el siguiente dato, una línea del fichero CSV en nuestro caso
+    public final T readTableFromSource() throws FileNotFoundException {
         openSource(source);
         processHeaders(getNextData());
         while (hasMoreData()){
@@ -28,5 +28,6 @@ public abstract class ReaderTemplate{
         closeSource();
         return table;
     }
+
 
 }
