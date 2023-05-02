@@ -6,8 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Practica1" />
+        <module name="GUIExample" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="CodigoPracticasML" target="11" />
+      <module name="Practica1" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

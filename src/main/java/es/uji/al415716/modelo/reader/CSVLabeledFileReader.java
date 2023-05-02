@@ -1,7 +1,6 @@
-package es.uji.al415716.reader;
+package es.uji.al415716.modelo.reader;
 
-import es.uji.al415716.table.Table;
-import es.uji.al415716.table.TableWithLabels;
+import es.uji.al415716.modelo.table.TableWithLabels;
 
 import java.util.List;
 

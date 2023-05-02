@@ -1,6 +1,6 @@
 package es.uji.al415716;
 
-import es.uji.al415716.distance.EuclideanDistance;
+import es.uji.al415716.modelo.distance.EuclideanDistance;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

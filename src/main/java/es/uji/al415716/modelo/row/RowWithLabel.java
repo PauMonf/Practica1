@@ -1,4 +1,4 @@
-package es.uji.al415716.row;
+package es.uji.al415716.modelo.row;
 
 import java.util.List;
 

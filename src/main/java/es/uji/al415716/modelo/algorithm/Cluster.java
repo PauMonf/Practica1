@@ -1,6 +1,6 @@
-package es.uji.al415716.algorithm;
+package es.uji.al415716.modelo.algorithm;
 
-import es.uji.al415716.row.Row;
+import es.uji.al415716.modelo.row.Row;
 
 import java.util.ArrayList;
 import java.util.HashSet;

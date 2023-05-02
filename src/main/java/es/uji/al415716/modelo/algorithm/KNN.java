@@ -1,9 +1,9 @@
-package es.uji.al415716.algorithm;
+package es.uji.al415716.modelo.algorithm;
 
-import es.uji.al415716.distance.Distance;
-import es.uji.al415716.distance.EuclideanDistance;
-import es.uji.al415716.row.RowWithLabel;
-import es.uji.al415716.table.TableWithLabels;
+import es.uji.al415716.modelo.distance.Distance;
+import es.uji.al415716.modelo.distance.EuclideanDistance;
+import es.uji.al415716.modelo.row.RowWithLabel;
+import es.uji.al415716.modelo.table.TableWithLabels;
 
 import java.util.List;
 

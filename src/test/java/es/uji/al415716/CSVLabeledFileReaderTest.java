@@ -1,7 +1,7 @@
 package es.uji.al415716;
 
-import es.uji.al415716.reader.CSVLabeledFileReader;
-import es.uji.al415716.table.TableWithLabels;
+import es.uji.al415716.modelo.reader.CSVLabeledFileReader;
+import es.uji.al415716.modelo.table.TableWithLabels;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;

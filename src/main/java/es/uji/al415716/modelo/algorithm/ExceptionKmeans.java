@@ -1,4 +1,4 @@
-package es.uji.al415716.algorithm;
+package es.uji.al415716.modelo.algorithm;
 
 public class ExceptionKmeans extends Exception{
     public ExceptionKmeans(){super();}

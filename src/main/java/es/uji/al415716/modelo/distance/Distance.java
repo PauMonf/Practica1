@@ -1,4 +1,4 @@
-package es.uji.al415716.distance;
+package es.uji.al415716.modelo.distance;
 
 import java.util.List;
 

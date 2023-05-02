@@ -1,6 +1,6 @@
-package es.uji.al415716.reader;
+package es.uji.al415716.modelo.reader;
 
-import es.uji.al415716.table.Table;
+import es.uji.al415716.modelo.table.Table;
 
 public class CSVUnlabeledFileReader extends CSVFileReader<Table> {
     public CSVUnlabeledFileReader(String source) {
