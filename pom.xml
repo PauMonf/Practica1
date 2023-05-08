@@ -20,7 +20,7 @@
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>es.uji.al415716.main.Hello</mainClass>
-                    <executable>/usr/lib/jvm/java-11-openjdk-amd64/bin/java</executable>
+                    <!-- <executable>/usr/lib/jvm/java-11-openjdk-amd64/bin/java</executable> -->
                 </configuration>
             </plugin>
         </plugins>

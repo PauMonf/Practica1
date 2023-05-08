@@ -16,6 +16,8 @@ public class Vista {
     private final Stage stage;
     private SongRecommender modelo;
     private Controlador controlador;
+    private Button recommend; //Lo he hecho global pq hay que actualizarlo
+
     public Vista(final Stage stage){
         this.stage=stage;
     }
@@ -49,29 +51,38 @@ public class Vista {
         root.getChildren().add(labelDistance);
 
         ToggleGroup distance = new ToggleGroup();
-        RadioButton euclidean = new RadioButton("Euclidean distance");
-        euclidean.fire();
-        euclidean.setToggleGroup(distance);
-        root.getChildren().add(euclidean);
-        RadioButton manhattan = new RadioButton("Manhattan distance");
-        manhattan.setToggleGroup(distance);
-        root.getChildren().add(manhattan);
+        RadioButton euclideanButton = new RadioButton("Euclidean distance");
+        euclideanButton.setOnAction(actionEvent -> controlador.setEuclidean());
+        euclideanButton.fire();
+        euclideanButton.setToggleGroup(distance);
+        root.getChildren().add(euclideanButton);
+        RadioButton manhattanButton = new RadioButton("Manhattan distance");
+        manhattanButton.setOnAction(actionEvent -> controlador.setManhattan());
+        manhattanButton.setToggleGroup(distance);
+        root.getChildren().add(manhattanButton);
 
         Label labelSongTitles = new Label("Song Titles:");
         root.getChildren().add(labelSongTitles);
 
         ObservableList<String> observableList= FXCollections.observableList(modelo.getNames());
         ListView<String> songTitles=new ListView<>(observableList);
+        songTitles.setOnMouseClicked(mouseEvent -> {
+            controlador.setSong(songTitles.getSelectionModel().getSelectedItem());
+        });
         root.getChildren().add(songTitles);
 
-        Button recommend = new Button("Recommend...");
+        recommend = new Button("Recommend...");
         recommend.setDisable(true);
+        recommend.setOnAction(actionEvent -> controlador.runRecommend());
         root.getChildren().add(recommend);
-
-
 
 
         stage.setScene(new Scene(root, 210, 340));
         stage.show();
+    }
+
+    public void updateButton(){
+        recommend.setText("Recommend on "+controlador.getSong());
+        recommend.setDisable(false);
     }
 }

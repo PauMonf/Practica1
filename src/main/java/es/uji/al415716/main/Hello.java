@@ -24,6 +24,7 @@ public class Hello extends Application {
 
     public void start(Stage primaryStage) throws FileNotFoundException {
         Vista vista=new Vista(primaryStage);
+
         primaryStage.setTitle("Hello World!");
         StackPane root = new StackPane();
         Button btn = new Button("Hola");
@@ -31,10 +32,13 @@ public class Hello extends Application {
         primaryStage.setScene(new Scene(root, 250, 130));
 
         SongRecommender sr=new SongRecommender();
-        Controlador c=new Controlador();
+        Controlador controlador=new Controlador();
         vista.setModelo(sr);
-        vista.setControlador(c);
+        vista.setControlador(controlador);
+        controlador.setVista(vista);
+
         vista.creaGUI();
+
         primaryStage.show();
     }
 }
