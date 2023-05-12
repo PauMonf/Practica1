@@ -41,7 +41,7 @@ public class RecSys {
 
         List<String> recommendations = new ArrayList<>(numRecommendations);
         Iterator<Integer> it = getClassSet(position).iterator();
-        for (int i = 0; i < numRecommendations && it.hasNext(); i++) {
+        while (recommendations.size() < numRecommendations && it.hasNext()) {
             int positionRecommendation = it.next();
             if (positionRecommendation != position)
                 recommendations.add(testItemNames.get(positionRecommendation));

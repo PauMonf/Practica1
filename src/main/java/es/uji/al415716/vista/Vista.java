@@ -1,88 +1,18 @@
 package es.uji.al415716.vista;
 
 import es.uji.al415716.controlador.Controlador;
-import es.uji.al415716.modelo.SongRecommender;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import es.uji.al415716.modelo.Modelo;
 
-import java.util.ArrayList;
+public interface Vista {
+    void setModelo(Modelo sr);
 
-public class Vista {
-    private final Stage stage;
-    private SongRecommender modelo;
-    private Controlador controlador;
-    private Button recommend; //Lo he hecho global pq hay que actualizarlo
+    void setControlador(Controlador c);
 
-    public Vista(final Stage stage){
-        this.stage=stage;
-    }
-    public void setModelo(SongRecommender sr){
-        modelo=sr;
-    }
+    void creaGUI();
 
-    public void setControlador(Controlador c){
-        controlador=c;
-    }
-    
-    public void creaGUI(){
-        stage.setTitle("Song Recommender");
-        VBox root=new VBox();
+    void creaGUIRecommend();
 
-        Label labelBased=new Label("Recommend based on:");
-        root.getChildren().add(labelBased);
+    void updateButton();
 
-        ToggleGroup basedOn = new ToggleGroup();
-        RadioButton songFeatures = new RadioButton("Song features");
-        songFeatures.setOnAction(actionEvent -> controlador.setKNN());
-        songFeatures.fire();
-        songFeatures.setToggleGroup(basedOn);
-        root.getChildren().add(songFeatures);
-        RadioButton guessedGenere = new RadioButton("Guessed genere");
-        guessedGenere.setOnAction(actionEvent -> controlador.setKMeans());
-        guessedGenere.setToggleGroup(basedOn);
-        root.getChildren().add(guessedGenere);
-
-        Label labelDistance=new Label("\nDistance Type:");
-        root.getChildren().add(labelDistance);
-
-        ToggleGroup distance = new ToggleGroup();
-        RadioButton euclideanButton = new RadioButton("Euclidean distance");
-        euclideanButton.setOnAction(actionEvent -> controlador.setEuclidean());
-        euclideanButton.fire();
-        euclideanButton.setToggleGroup(distance);
-        root.getChildren().add(euclideanButton);
-        RadioButton manhattanButton = new RadioButton("Manhattan distance");
-        manhattanButton.setOnAction(actionEvent -> controlador.setManhattan());
-        manhattanButton.setToggleGroup(distance);
-        root.getChildren().add(manhattanButton);
-
-        Label labelSongTitles = new Label("Song Titles:");
-        root.getChildren().add(labelSongTitles);
-
-        ObservableList<String> observableList= FXCollections.observableList(modelo.getNames());
-        ListView<String> songTitles=new ListView<>(observableList);
-        songTitles.setOnMouseClicked(mouseEvent -> {
-            controlador.setSong(songTitles.getSelectionModel().getSelectedItem());
-        });
-        root.getChildren().add(songTitles);
-
-        recommend = new Button("Recommend...");
-        recommend.setDisable(true);
-        recommend.setOnAction(actionEvent -> controlador.runRecommend());
-        root.getChildren().add(recommend);
-
-
-        stage.setScene(new Scene(root, 210, 340));
-        stage.show();
-    }
-
-    public void updateButton(){
-        recommend.setText("Recommend on "+controlador.getSong());
-        recommend.setDisable(false);
-    }
+    void updateRecs();
 }

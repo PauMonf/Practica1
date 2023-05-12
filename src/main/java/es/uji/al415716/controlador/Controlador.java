@@ -1,44 +1,32 @@
 package es.uji.al415716.controlador;
 
-import es.uji.al415716.modelo.algorithm.Algorithm;
-import es.uji.al415716.modelo.algorithm.KNN;
-import es.uji.al415716.modelo.algorithm.RecSys;
+import es.uji.al415716.modelo.Modelo;
 import es.uji.al415716.vista.Vista;
 
-import java.util.List;
+public interface Controlador {
+    void setVista(Vista vista);
 
-public class Controlador {
-    private Vista vista;
-    private Algorithm algorithm;
-    private int algorithmNum;
-    private int distanceNum;
-    private String song;
+    void setKNN();
 
-    public Controlador(){
-    }
+    void setKMeans();
 
-    public void setVista(Vista vista){this.vista=vista;}
+    void setEuclidean();
 
-    public void setKNN(){
-        algorithmNum=0;
-    }
-    public void setKMeans(){
-        algorithmNum=1;
-    }
+    void setManhattan();
 
-    public void setEuclidean(){ distanceNum=0;}
-    public void setManhattan(){ distanceNum=1;}
+    void setSong(String song);
 
-    public void setSong(String song){
-        this.song=song;
-        vista.updateButton();
-    }
+    String getSong();
 
-    public String getSong() {
-        return song;
-    }
+    void setNumRecs(int n);
 
-    public void runRecommend(){
+    int getNumRecs();
 
-    }
+    void setModelo(Modelo sr);
+
+    void createModelo() throws Exception;
+
+    void runRecommend() throws Exception;
+
+    void firstRecommend() throws Exception;
 }
