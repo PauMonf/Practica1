@@ -1,5 +1,7 @@
-package es.uji.al415716.modelo.algorithm;
+package es.uji.al415716.modelo.algorithm.RecSys;
 
+import es.uji.al415716.modelo.algorithm.Algorithm;
+import es.uji.al415716.modelo.algorithm.KMeans.UndefinedNameException;
 import es.uji.al415716.modelo.table.Table;
 
 import java.util.*;
@@ -37,13 +39,15 @@ public class RecSys {
     public List<String> recommend(String nameLikedItem, int numRecommendations) throws Exception {
         int position = testItemNames.indexOf(nameLikedItem);
 
-        if (position == -1) throw new UndefinedNameException();
+        if (position == -1) {
+            throw new UndefinedNameException();
+        }
 
         List<String> recommendations = new ArrayList<>(numRecommendations);
         Iterator<Integer> it = getClassSet(position).iterator();
         while (recommendations.size() < numRecommendations && it.hasNext()) {
             int positionRecommendation = it.next();
-            if (positionRecommendation != position)
+            if (positionRecommendation!=position)
                 recommendations.add(testItemNames.get(positionRecommendation));
         }
         return recommendations;

@@ -17,10 +17,10 @@ public class ImplementacionVista implements Vista{
     private Controlador controlador;
     private Button recommendButton; //Lo he hecho global pq hay que actualizarlo
     private ObservableList<String> observableList;
+    private Label recommendationsTitle;
 
 
     public ImplementacionVista(final Stage stage) {
-
         this.stage = stage;
     }
 
@@ -34,78 +34,107 @@ public class ImplementacionVista implements Vista{
 
     public void creaGUI() {
         stage.setTitle("Song Recommender");
-        VBox root = new VBox(5);
+        VBox root = new VBox(5,chooseAlgorithm(),chooseDistance(),chooseSong(),makeRecommendButton());
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 
+    private VBox chooseAlgorithm(){
+        VBox box=new VBox();
         Label labelBased = new Label("Recommend based on:");
-        root.getChildren().add(labelBased);
+        box.getChildren().add(labelBased);
 
         ToggleGroup basedOn = new ToggleGroup();
         RadioButton songFeatures = new RadioButton("Song features");
         songFeatures.setOnAction(actionEvent -> controlador.setKNN());
         songFeatures.fire(); //Esta linea es para poner elegir este botón como predeterminado
         songFeatures.setToggleGroup(basedOn);
-        root.getChildren().add(songFeatures);
+        box.getChildren().add(songFeatures);
         RadioButton guessedGenere = new RadioButton("Guessed genere");
         guessedGenere.setOnAction(actionEvent -> controlador.setKMeans());
         guessedGenere.setToggleGroup(basedOn);
-        root.getChildren().add(guessedGenere);
+        box.getChildren().add(guessedGenere);
+
+        return box;
+    }
+
+    private VBox chooseDistance(){
+        VBox box=new VBox();
 
         Label labelDistance = new Label("\nDistance Type:");
-        root.getChildren().add(labelDistance);
+        box.getChildren().add(labelDistance);
 
         ToggleGroup distance = new ToggleGroup();
         RadioButton euclideanButton = new RadioButton("Euclidean distance");
         euclideanButton.setOnAction(actionEvent -> controlador.setEuclidean());
         euclideanButton.fire();
         euclideanButton.setToggleGroup(distance);
-        root.getChildren().add(euclideanButton);
+        box.getChildren().add(euclideanButton);
         RadioButton manhattanButton = new RadioButton("Manhattan distance");
         manhattanButton.setOnAction(actionEvent -> controlador.setManhattan());
         manhattanButton.setToggleGroup(distance);
-        root.getChildren().add(manhattanButton);
+        box.getChildren().add(manhattanButton);
+
+        return box;
+    }
+
+    private VBox chooseSong(){
+        VBox box=new VBox();
 
         Label labelSongTitles = new Label("\nSong Titles:");
-        root.getChildren().add(labelSongTitles);
+        box.getChildren().add(labelSongTitles);
 
         ObservableList<String> observableList = FXCollections.observableList(modelo.getNames());
         ListView<String> songTitles = new ListView<>(observableList);
+        songTitles.setTooltip(new Tooltip("Doble click para empezar a recomendar"));
         songTitles.setOnMouseClicked(mouseEvent -> {
             controlador.setSong(songTitles.getSelectionModel().getSelectedItem());
             if (mouseEvent.getClickCount() > 1){ //En caso de doble click (o más)
                 try {
-                    controlador.firstRecommend();
+                    controlador.createModelo();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
 
         });
-        root.getChildren().add(songTitles);
+        box.getChildren().add(songTitles);
 
+        return box;
+    }
+
+    private Button makeRecommendButton(){
         recommendButton = new Button("Recommend...");
         recommendButton.setDisable(true);
         recommendButton.setOnAction(actionEvent -> {
             try {
-                controlador.firstRecommend();
+                controlador.createModelo();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
-        root.getChildren().add(recommendButton);
-
-        stage.setScene(new Scene(root));
-        stage.show();
+        return recommendButton;
     }
 
     public void creaGUIRecommend() {
         stage.setTitle("Recommended songs");
-        VBox root = new VBox(5);
+        VBox root = new VBox(5,chooseNumRecs(),makeListRecs());
+        stage.setScene(new Scene(root, 210, 340));
+        stage.show();
+    }
 
+    private void RecommendationsTitle(){
+        if (recommendationsTitle==null)
+            recommendationsTitle=new Label();
+        recommendationsTitle.setText("If you liked " + controlador.getSong() + " you might like:");
+    }
+
+    private HBox chooseNumRecs(){
         HBox boxNumRecs=new HBox(3);
         Label labelNumRecs = new Label("Number of recommendations:");
         boxNumRecs.getChildren().add(labelNumRecs);
 
-        Spinner<Integer> numRecsSpinner = new Spinner<>(1, modelo.getNames().size(), controlador.getNumRecs(), 1);
+        Spinner<Integer> numRecsSpinner = new Spinner<>(1, modelo.maxCluster(), controlador.getNumRecs(), 1);
         numRecsSpinner.setEditable(true);
         numRecsSpinner.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (!Objects.equals(controlador.getNumRecs(), newValue)) {
@@ -118,10 +147,14 @@ public class ImplementacionVista implements Vista{
             }
         });
         boxNumRecs.getChildren().add(numRecsSpinner);
-        root.getChildren().add(boxNumRecs);
+        return boxNumRecs;
+    }
 
-        Label recommendationsTitle = new Label("If you liked " + controlador.getSong() + " you might like:");
-        root.getChildren().add(recommendationsTitle);
+    private VBox makeListRecs(){
+        VBox box=new VBox();
+
+        RecommendationsTitle();
+        box.getChildren().add(recommendationsTitle);
 
         observableList = FXCollections.observableList(modelo.getRecommendations());
         ListView<String> recommendationsListView = new ListView<>(observableList);
@@ -133,10 +166,9 @@ public class ImplementacionVista implements Vista{
                 throw new RuntimeException(e);
             }
         });
-        root.getChildren().add(recommendationsListView);
+        box.getChildren().add(recommendationsListView);
 
-        stage.setScene(new Scene(root, 210, 340));
-        stage.show();
+        return box;
     }
 
     public void updateButton() {
@@ -149,6 +181,7 @@ public class ImplementacionVista implements Vista{
             observableList.setAll(modelo.getRecommendations());
         else
             observableList = FXCollections.observableList(modelo.getRecommendations());
+        RecommendationsTitle();
     }
 
 }

@@ -1,7 +1,9 @@
 package es.uji.al415716;
 
+import es.uji.al415716.modelo.algorithm.KMeans.ExceptionKmeans;
 import es.uji.al415716.modelo.reader.CSV;
-import es.uji.al415716.modelo.algorithm.KMeans;
+import es.uji.al415716.modelo.algorithm.KMeans.KMeans;
+import es.uji.al415716.modelo.table.Table;
 import es.uji.al415716.modelo.table.TableWithLabels;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +15,9 @@ class KMeansTest {
 
     @Test
     void train() {
+        Table tablaVacia=new Table();
+        KMeans kMeans=new KMeans(3,3,3);
+        assertThrows(ExceptionKmeans.class, () -> kMeans.train(tablaVacia));
     }
 
     @Test

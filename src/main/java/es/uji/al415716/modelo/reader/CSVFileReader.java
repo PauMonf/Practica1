@@ -50,6 +50,7 @@ public class CSVFileReader<T extends Table> extends ReaderTemplate<T> {
     String getNextData() {
         return scanner.nextLine();
     }
+
     public List<String> lineToList(String line){
         return List.of(line.split(SPLITTER));
     }

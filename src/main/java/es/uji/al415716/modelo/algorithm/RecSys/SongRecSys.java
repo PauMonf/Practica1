@@ -1,5 +1,8 @@
-package es.uji.al415716.modelo.algorithm;
+package es.uji.al415716.modelo.algorithm.RecSys;
 
+import es.uji.al415716.modelo.algorithm.Algorithm;
+import es.uji.al415716.modelo.algorithm.KMeans.KMeans;
+import es.uji.al415716.modelo.algorithm.KNN;
 import es.uji.al415716.modelo.reader.CSV;
 import es.uji.al415716.modelo.table.Table;
 
@@ -26,7 +29,7 @@ class SongRecSys {
         filenames.put("kmeans"+"test",ruta+sep+"songs_test_withoutnames.csv");
 
         // Algorithms
-        Map<String,Algorithm> algorithms = new HashMap<>();
+        Map<String, Algorithm> algorithms = new HashMap<>();
         algorithms.put("knn",new KNN());
         algorithms.put("kmeans",new KMeans(15, 200, 4321));
 

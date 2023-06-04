@@ -5,6 +5,7 @@ import es.uji.al415716.modelo.algorithm.KNN;
 import es.uji.al415716.modelo.table.TableWithLabels;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,10 +13,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class KNNTest {
 
     @Test
-    void estimate() throws Exception {
+    void estimate() throws FileNotFoundException {
         KNN knn = new KNN();
         CSV csv = new CSV();
-        TableWithLabels tableWithLabels = csv.readTableWithLabel("data/iris.csv");
+        String sep=System.getProperty("file.separator");
+        TableWithLabels tableWithLabels = csv.readTableWithLabel("data"+sep+"iris.csv");
         knn.train(tableWithLabels);
         List<Double> data;
 
@@ -38,7 +40,7 @@ class KNNTest {
 
 
     @Test
-    void euclideanMetric() throws Exception {
+    void euclideanMetric(){
         KNN knn = new KNN();
         List<Double> a,b;
 

@@ -1,7 +1,8 @@
 package es.uji.al415716.modelo;
 
 import es.uji.al415716.modelo.algorithm.Algorithm;
-import es.uji.al415716.modelo.algorithm.RecSys;
+import es.uji.al415716.modelo.algorithm.KMeans.UndefinedNameException;
+import es.uji.al415716.modelo.algorithm.RecSys.RecSys;
 import es.uji.al415716.modelo.distance.Distance;
 import es.uji.al415716.modelo.reader.CSVLabeledFileReader;
 import es.uji.al415716.modelo.table.TableWithLabels;
@@ -22,6 +23,7 @@ public class SongRecommender implements Modelo{
     private RecSys recSys;
     private List<String> recommendations;
     private Vista vista;
+    private String song;
 
     public SongRecommender() throws FileNotFoundException {
         CSVLabeledFileReader reader=new CSVLabeledFileReader(ruta+sep+"songs_test.csv");
@@ -35,10 +37,18 @@ public class SongRecommender implements Modelo{
         return names;
     }
 
-    public void setAlgorithm(Algorithm<TableWithLabels, List<Double>, Integer> algorithm) throws Exception {
+    public void setAlgorithm(Algorithm<TableWithLabels, List<Double>, Integer> algorithm,String song,int numRecs) throws Exception {
+        /*
+        Este método solo se ejecuta durante la primera recomendación (desde la primera GUI)
+        y ahí es necesario ejecutar el run y el train, a partir de ahí solo utilizo el método
+        runRecommend del controlador, que llama a recommend del modelo. No veo cómo se puede
+        optimizar más.
+        */
         recSys=new RecSys(algorithm);
         recSys.train(trainData);
         recSys.run(table,names);
+        recommend(numRecs);
+        vista.creaGUIRecommend();
     }
 
      public void setDistance(Distance distance){
@@ -56,8 +66,9 @@ public class SongRecommender implements Modelo{
         return names;
     }
 
-    public void recommend(String likdedItem,int n) throws Exception {
-        recommendations = recSys.recommend(likdedItem,n);
+    public void recommend(int n) throws Exception {
+        recommendations = recSys.recommend(song,n);
+        vista.updateRecs();
     }
 
     public List<String> getRecommendations() {
@@ -66,5 +77,19 @@ public class SongRecommender implements Modelo{
 
     public void setVista(Vista vista) {
         this.vista = vista;
+    }
+
+    public void setSong(String song){
+        this.song=song;
+        vista.updateButton();
+    }
+
+    public int maxCluster(){
+        try {
+            int positionSong = names.indexOf(song);
+            return recSys.getClassSet(positionSong).size();
+        }catch (Exception e) {
+            return getNames().size();
+        }
     }
 }

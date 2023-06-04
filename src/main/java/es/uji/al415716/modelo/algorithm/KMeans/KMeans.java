@@ -1,5 +1,7 @@
-package es.uji.al415716.modelo.algorithm;
+package es.uji.al415716.modelo.algorithm.KMeans;
 
+import es.uji.al415716.modelo.algorithm.Algorithm;
+import es.uji.al415716.modelo.algorithm.DistanceClient;
 import es.uji.al415716.modelo.distance.Distance;
 import es.uji.al415716.modelo.distance.EuclideanDistance;
 import es.uji.al415716.modelo.row.Row;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class KMeans implements Algorithm<Table,List<Double>,Integer>, DistanceClient{
+public class KMeans implements Algorithm<Table,List<Double>,Integer>, DistanceClient {
     private int numClusters;
     private int numIterations;
     private long seed;
@@ -93,18 +95,6 @@ public class KMeans implements Algorithm<Table,List<Double>,Integer>, DistanceCl
 
     public double distance(List<Double> z, List<Double> x) {
         return distance.calculateDistance(z,x);
-    }
-
-    public List<Double> centroide(List<Row> puntos) {
-        List<Double> centroide = new ArrayList<>(puntos.get(0).getData().size());
-        for (Row row : puntos) {
-            for (int i = 0; i < row.getData().size(); i++)
-                centroide.set(i, centroide.get(i) + row.getData().get(i));
-        }
-        for (int i = 0; i < centroide.size(); i++){
-            centroide.set(i,centroide.get(i)/ puntos.size());
-        }
-        return centroide;
     }
 
     public Integer estimate(List<Double> dato){

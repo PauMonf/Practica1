@@ -3,6 +3,7 @@ package es.uji.al415716;
 import es.uji.al415716.modelo.reader.CSV;
 import es.uji.al415716.modelo.table.Table;
 import es.uji.al415716.modelo.table.TableWithLabels;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -11,10 +12,18 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CSVTest {
+    CSV csv;
+    String sep;
+
+    @BeforeEach
+    void preTest(){
+        csv = new CSV();
+        sep = System.getProperty("file.separator");
+    }
+
     @Test
     void readTable() throws FileNotFoundException {
-        CSV csv = new CSV();
-        Table table = csv.readTable("data/miles_dollars.csv");
+        Table table = csv.readTable("data"+sep+"miles_dollars.csv");
 
         //Comrueba el número de ejemplares leído
         assertEquals(25, table.getRows().size());
@@ -40,7 +49,7 @@ class CSVTest {
     @Test
     void readTableWithLabels() throws FileNotFoundException {
         CSV csv = new CSV();
-        TableWithLabels tableWithLabels = csv.readTableWithLabel("data/iris.csv");
+        TableWithLabels tableWithLabels = csv.readTableWithLabel("data"+sep+"iris.csv");
 
         //Comrueba el número de ejemplares leído
         assertEquals(150, tableWithLabels.getRows().size());

@@ -1,4 +1,4 @@
-package es.uji.al415716.modelo.algorithm;
+package es.uji.al415716.modelo.algorithm.KMeans;
 
 import es.uji.al415716.modelo.row.Row;
 

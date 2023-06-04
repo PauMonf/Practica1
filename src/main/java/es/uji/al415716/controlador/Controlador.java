@@ -28,5 +28,4 @@ public interface Controlador {
 
     void runRecommend() throws Exception;
 
-    void firstRecommend() throws Exception;
 }

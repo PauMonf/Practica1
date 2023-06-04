@@ -2,7 +2,7 @@ package es.uji.al415716.controlador;
 
 import es.uji.al415716.modelo.Modelo;
 import es.uji.al415716.modelo.algorithm.Algorithm;
-import es.uji.al415716.modelo.algorithm.KMeans;
+import es.uji.al415716.modelo.algorithm.KMeans.KMeans;
 import es.uji.al415716.modelo.algorithm.KNN;
 import es.uji.al415716.modelo.distance.Distance;
 import es.uji.al415716.modelo.distance.EuclideanDistance;
@@ -33,7 +33,7 @@ public class ImplementacionControlador implements Controlador{
 
     public void setSong(String song){
         this.song=song;
-        vista.updateButton();
+        modelo.setSong(song);
     }
 
     public String getSong() {
@@ -62,21 +62,10 @@ public class ImplementacionControlador implements Controlador{
             case 1: algorithm=new KMeans(15, 200, 4321, distance); break;
             default: algorithm=new KNN(distance); break;
         }
-        modelo.setAlgorithm(algorithm);
+        modelo.setAlgorithm(algorithm,song,numRecs);
     }
 
     public void runRecommend() throws Exception {
-        modelo.recommend(song,numRecs);
-        vista.updateRecs();
-    }
-
-    public void firstRecommend() throws Exception {
-        createModelo();
-        try {
-            runRecommend();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        vista.creaGUIRecommend();
+        modelo.recommend(numRecs);
     }
 }
